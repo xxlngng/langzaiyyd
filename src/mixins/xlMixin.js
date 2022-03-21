@@ -205,9 +205,9 @@ export const xlMixin = {
       this.loadData()
     },
     /* 导出 */
-    handleExportXls2() {
-      let paramsStr = encodeURI(JSON.stringify(this.getQueryParams()))
-      let url = `${window._CONFIG['domianURL']}/${this.url.exportXlsUrl}?paramsStr=${paramsStr}`
+    handleExportXls2(url) {
+      // let paramsStr = encodeURI(JSON.stringify(this.getQueryParams()))
+      // let url = `${window._CONFIG['domianURL']}/${this.url.exportXlsUrl}?paramsStr=${paramsStr}`
       window.location.href = url
     },
     handleExportWord(id) {

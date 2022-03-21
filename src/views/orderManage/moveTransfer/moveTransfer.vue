@@ -9,24 +9,17 @@
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="6">
-            <a-form-item label="处理人/部门：">
-              <a-input placeholder="请输入处理人/部门" v-model="queryParam.HandleMan"></a-input>
+            <a-form-item label="是否超时：">
+              <a-input placeholder="请输入是否超时：" v-model="queryParam.IsTimeOut"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="6">
-            <a-form-item label="站址名称：">
-              <a-input placeholder="请输入站址名称" v-model="queryParam.SiteName"></a-input>
-            </a-form-item>
-          </a-col>
-          <!-- <a-col :md="10" :sm="10"> -->
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
             <a-button type="primary" @click="searchReset" style="margin-left: 8px" icon="reload">重置</a-button>
-            <a-button type="primary" @click="handleExportXls('铁塔故障工单')" icon="export" style="margin-left: 8px"
+            <a-button type="primary" @click="handleExportXls('移动传输工单')" icon="export" style="margin-left: 8px"
               >导出</a-button
             >
           </span>
-          <!-- </a-col> -->
         </a-row>
       </a-form>
     </div>
@@ -68,59 +61,49 @@ export default {
           dataIndex: 'WoStatus'
         },
         {
-          title: '处理人/部门',
+          title: '工单号',
           align: 'center',
-          dataIndex: 'HandleMan'
+          dataIndex: 'WoNum'
         },
         {
-          title: '处理人电话',
+          title: '工单标题',
           align: 'center',
-          dataIndex: 'Tel'
+          dataIndex: 'WoTitle'
         },
         {
-          title: '派单时间',
+          title: '设备维护单位',
           align: 'center',
-          dataIndex: 'SendWoTime'
+          dataIndex: 'DWCompany'
         },
         {
-          title: '时限（分钟）',
+          title: 'T1升级移交时间',
           align: 'center',
-          dataIndex: 'TimeLimit'
+          dataIndex: 'HandleTime'
         },
         {
-          title: '故障设备类型',
+          title: '是否延期有效',
           align: 'center',
-          dataIndex: 'FalutType'
+          dataIndex: 'IsValid'
         },
         {
-          title: '告警状态',
+          title: '是否超时',
           align: 'center',
-          dataIndex: 'AlarmStatus'
+          dataIndex: 'IsTimeOut'
         },
         {
-          title: '告警描述',
+          title: '告警对象',
           align: 'center',
-          dataIndex: 'AlarmInfo'
+          dataIndex: 'AlarmObject'
         },
         {
-          title: '站址运维ID',
+          title: '告警标准名',
           align: 'center',
-          dataIndex: 'OperationID'
+          dataIndex: 'AlarmName'
         },
         {
-          title: '站址名称',
+          title: '当月已派发相同工单数',
           align: 'center',
-          dataIndex: 'SiteName'
-        },
-        {
-          title: '工单历时（分钟）',
-          align: 'center',
-          dataIndex: 'TimeTake'
-        },
-        {
-          title: '告警时间',
-          align: 'center',
-          dataIndex: 'AlarmTime'
+          dataIndex: 'SameWo'
         },
         {
           title: '操作',
@@ -131,8 +114,8 @@ export default {
         }
       ],
       url: {
-        list: '/Data_Manage/Data_Wo_Son_Fault/GetData_Wo_Son_FaultList',
-        exportXlsUrl: '/Data_Manage​/Data_Wo_Son_Fault​/Data_Wo_Son_FaultExport'
+        list: '/Data_Manage/Data_Wo_Son_Transmission/GetData_Wo_Son_TransmissionList',
+        exportXlsUrl: '/Data_Manage/Data_Wo_Son_Transmission/Data_Wo_Son_TransmissionExport'
       }
     }
   },
@@ -143,19 +126,17 @@ export default {
     detail(record) {
       const info = [
         { name: '工单状态', value: 'WoStatus' },
-        { name: '处理人/部门', value: 'WoStatus' },
-        { name: '处理人电话', value: 'Tel' },
-        { name: '派单时间', value: 'SendWoTime' },
-        { name: '时限（分钟）', value: 'TimeLimit' },
-        { name: '故障设备类型', value: 'FalutType' },
-        { name: '告警状态', value: 'AlarmStatus' },
-        { name: '告警描述', value: 'AlarmInfo' },
-        { name: '站址运维ID', value: 'OperationID' },
-        { name: '站址名称', value: 'OperationID' },
-        { name: '工单历时(分钟)', value: 'TimeTake' },
-        { name: '告警时间', value: 'AlarmTime' }
+        { name: '工单号', value: 'WoNum' },
+        { name: '工单标题', value: 'WoTitle' },
+        { name: '设备维护单位', value: 'DWCompany' },
+        { name: 'T1升级移交时间', value: 'HandleTime' },
+        { name: '是否延期有效', value: 'IsValid' },
+        { name: '是否超时', value: 'IsTimeOut' },
+        { name: '告警对象', value: 'AlarmObject' },
+        { name: '告警标准名', value: 'AlarmName' },
+        { name: '当月已派发相同工单数', value: 'SameWo' }
       ]
-      this.$refs.refModal.openModal(record,info,'/Data_Manage/Data_Wo_Son_Fault/GetData_Wo_Son_Fault')
+      this.$refs.refModal.openModal(record, info, '/Data_Manage/Data_Wo_Son_Transmission/GetData_Wo_Son_Transmission')
     }
   }
 }

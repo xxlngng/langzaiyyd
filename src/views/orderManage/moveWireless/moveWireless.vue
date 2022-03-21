@@ -9,13 +9,13 @@
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="6">
-            <a-form-item label="处理人/部门：">
-              <a-input placeholder="请输入处理人/部门" v-model="queryParam.HandleMan"></a-input>
+            <a-form-item label="小区名：">
+              <a-input placeholder="请输入小区名：" v-model="queryParam.AreaName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="6">
-            <a-form-item label="站址名称：">
-              <a-input placeholder="请输入站址名称" v-model="queryParam.SiteName"></a-input>
+            <a-form-item label="基站名：">
+              <a-input placeholder="请输入基站名" v-model="queryParam.SiteName"></a-input>
             </a-form-item>
           </a-col>
           <!-- <a-col :md="10" :sm="10"> -->
@@ -68,59 +68,54 @@ export default {
           dataIndex: 'WoStatus'
         },
         {
-          title: '处理人/部门',
+          title: '告警名称',
           align: 'center',
-          dataIndex: 'HandleMan'
+          dataIndex: 'AlarmName'
         },
         {
-          title: '处理人电话',
+          title: '小区名',
           align: 'center',
           dataIndex: 'Tel'
         },
         {
-          title: '派单时间',
-          align: 'center',
-          dataIndex: 'SendWoTime'
-        },
-        {
-          title: '时限（分钟）',
-          align: 'center',
-          dataIndex: 'TimeLimit'
-        },
-        {
-          title: '故障设备类型',
-          align: 'center',
-          dataIndex: 'FalutType'
-        },
-        {
-          title: '告警状态',
-          align: 'center',
-          dataIndex: 'AlarmStatus'
-        },
-        {
-          title: '告警描述',
-          align: 'center',
-          dataIndex: 'AlarmInfo'
-        },
-        {
-          title: '站址运维ID',
-          align: 'center',
-          dataIndex: 'OperationID'
-        },
-        {
-          title: '站址名称',
+          title: '基站名',
           align: 'center',
           dataIndex: 'SiteName'
         },
         {
-          title: '工单历时（分钟）',
+          title: '派单时间',
           align: 'center',
-          dataIndex: 'TimeTake'
+          dataIndex: 'HandleTime'
         },
         {
-          title: '告警时间',
+          title: '主设备',
           align: 'center',
-          dataIndex: 'AlarmTime'
+          dataIndex: 'HandleTime'
+        },
+        {
+          title: '受理专业',
+          align: 'center',
+          dataIndex: 'RecoveryTime'
+        },
+        {
+          title: '恢复时间',
+          align: 'center',
+          dataIndex: 'AlarmInfo'
+        },
+        {
+          title: '最新回复内容',
+          align: 'center',
+          dataIndex: 'LatestMsg'
+        },
+        {
+          title: '优化片区',
+          align: 'center',
+          dataIndex: 'OptimizeArea'
+        },
+        {
+          title: '网格组长',
+          align: 'center',
+          dataIndex: 'GridLeader'
         },
         {
           title: '操作',
@@ -131,8 +126,8 @@ export default {
         }
       ],
       url: {
-        list: '/Data_Manage/Data_Wo_Son_Fault/GetData_Wo_Son_FaultList',
-        exportXlsUrl: '/Data_Manage​/Data_Wo_Son_Fault​/Data_Wo_Son_FaultExport'
+        list: '/Data_Manage/Data_Wo_Son_WuXian/GetData_Wo_Son_WuXianList',
+        exportXlsUrl: '/Data_Manage/Data_Wo_Son_WuXian/Data_Wo_Son_WuXianExport'
       }
     }
   },
@@ -143,19 +138,17 @@ export default {
     detail(record) {
       const info = [
         { name: '工单状态', value: 'WoStatus' },
-        { name: '处理人/部门', value: 'WoStatus' },
-        { name: '处理人电话', value: 'Tel' },
-        { name: '派单时间', value: 'SendWoTime' },
-        { name: '时限（分钟）', value: 'TimeLimit' },
-        { name: '故障设备类型', value: 'FalutType' },
-        { name: '告警状态', value: 'AlarmStatus' },
-        { name: '告警描述', value: 'AlarmInfo' },
-        { name: '站址运维ID', value: 'OperationID' },
-        { name: '站址名称', value: 'OperationID' },
-        { name: '工单历时(分钟)', value: 'TimeTake' },
-        { name: '告警时间', value: 'AlarmTime' }
+        { name: '告警名称', value: 'AlarmName' },
+        { name: '小区名', value: 'AreaName' },
+        { name: '基站名', value: 'SiteName' },
+        { name: '派单时间', value: 'HandleTime' },
+        { name: '受理专业', value: 'RecoveryTime' },
+        { name: '恢复时间', value: 'AlarmInfo' },
+        { name: '最新回复内容', value: 'LatestMsg' },
+        { name: '优化片区', value: 'OptimizeArea' },
+        { name: '网格组长', value: 'GridLeader' },
       ]
-      this.$refs.refModal.openModal(record,info,'/Data_Manage/Data_Wo_Son_Fault/GetData_Wo_Son_Fault')
+      this.$refs.refModal.openModal(record,info,'/Data_Manage/Data_Wo_Son_WuXian/GetData_Wo_Son_WuXian')
     }
   }
 }

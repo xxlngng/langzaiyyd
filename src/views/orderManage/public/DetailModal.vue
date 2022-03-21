@@ -48,13 +48,13 @@ export default {
     }
   },
   methods: {
-    openModal(row, info) {
+    openModal(row, info,url) {
       this.infoCol = info
       this.visible = true
       this.confirmLoading = true
 
       this.$http
-        .post('/Data_Manage/Data_Wo_Son_Fault/GetData_Wo_Son_Fault', { id: row.Id })
+        .post(url, { id: row.Id })
         .then(res => {
           if (res.Success) {
             this.data = res.Data
