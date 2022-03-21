@@ -6,41 +6,8 @@
           <p style="margin-bottom: 0">工单信息</p>
         </template>
         <a-descriptions>
-          <a-descriptions-item label="工单状态">
-            {{ data.WoStatus }}
-          </a-descriptions-item>
-          <a-descriptions-item label="处理人/部门">
-            {{ data.HandleMan }}
-          </a-descriptions-item>
-          <a-descriptions-item label="处理人电话">
-            {{ data.Tel }}
-          </a-descriptions-item>
-          <a-descriptions-item label="派单时间">
-            {{ data.SendWoTime }}
-          </a-descriptions-item>
-          <a-descriptions-item label="时限（分钟）">
-            {{ data.TimeLimit }}
-          </a-descriptions-item>
-          <a-descriptions-item label="故障设备类型">
-            {{ data.FalutType }}
-          </a-descriptions-item>
-          <a-descriptions-item label="告警状态">
-            {{ data.AlarmStatus }}
-          </a-descriptions-item>
-          <a-descriptions-item label="告警描述">
-            {{ data.AlarmInfo }}
-          </a-descriptions-item>
-          <a-descriptions-item label="站址运维ID">
-            {{ data.OperationID }}
-          </a-descriptions-item>
-          <a-descriptions-item label="站址名称">
-            {{ data.OperationID }}
-          </a-descriptions-item>
-          <a-descriptions-item label="工单历时(分钟)">
-            {{ data.TimeTake }}
-          </a-descriptions-item>
-          <a-descriptions-item label="告警时间">
-            {{ data.AlarmTime }}
+          <a-descriptions-item v-for="(item, index) in infoCol" :key="index" :label="item.name">
+            {{ data[item.value] }}
           </a-descriptions-item>
         </a-descriptions>
       </a-card>
@@ -62,7 +29,7 @@
       <img alt="预览" style="width: 100%" :src="previewImage" />
     </a-modal>
     <template slot="footer">
-      <a-button click="cancel" @click="visible=false">取消</a-button>
+      <a-button click="cancel" @click="visible = false">取消</a-button>
     </template>
   </a-modal>
 </template>
@@ -73,6 +40,7 @@ export default {
   data() {
     return {
       visible: false,
+      infoCol: [],
       confirmLoading: false,
       data: {},
       previewVisible: false,
@@ -80,7 +48,8 @@ export default {
     }
   },
   methods: {
-    openModal(row) {
+    openModal(row, info) {
+      this.infoCol = info
       this.visible = true
       this.confirmLoading = true
 

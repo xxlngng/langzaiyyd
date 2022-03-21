@@ -53,7 +53,7 @@
 
 <script>
 import { xlMixin } from '@/mixins/xlMixin'
-import DetailModal from './DetailModal'
+import DetailModal from '../public/DetailModal'
 
 export default {
   mixins: [xlMixin],
@@ -141,7 +141,21 @@ export default {
   mounted() {},
   methods: {
     detail(record) {
-      this.$refs.refModal.openModal(record)
+      const info = [
+        { name: '工单状态', value: 'WoStatus' },
+        { name: '处理人/部门', value: 'WoStatus' },
+        { name: '处理人电话', value: 'Tel' },
+        { name: '派单时间', value: 'SendWoTime' },
+        { name: '时限（分钟）', value: 'TimeLimit' },
+        { name: '故障设备类型', value: 'FalutType' },
+        { name: '告警状态', value: 'AlarmStatus' },
+        { name: '告警描述', value: 'AlarmInfo' },
+        { name: '站址运维ID', value: 'OperationID' },
+        { name: '站址名称', value: 'OperationID' },
+        { name: '工单历时(分钟)', value: 'TimeTake' },
+        { name: '告警时间', value: 'AlarmTime' }
+      ]
+      this.$refs.refModal.openModal(record,info)
     }
   }
 }
