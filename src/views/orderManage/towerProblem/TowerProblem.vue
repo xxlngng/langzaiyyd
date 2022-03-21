@@ -3,19 +3,30 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
-          <a-col :md="6" :sm="6"> </a-col>
           <a-col :md="6" :sm="6">
-            <a-form-item label="标题">
-              <a-input placeholder="请输入标题" v-model="queryParam.datasourceTitle"></a-input>
+            <a-form-item label="工单状态：">
+              <a-input placeholder="请输入工单状态" v-model="queryParam.WoStatus"></a-input>
             </a-form-item>
           </a-col>
-		  <a-col :md="10" :sm="10">
-            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
-              <a-button type="primary" @click="searchReset" style="margin-left: 8px" icon="reload">重置</a-button>
-              <a-button type="primary" @click="add" icon="plus" style="margin-left: 8px">导出</a-button>
-            </span>
+          <a-col :md="6" :sm="6">
+            <a-form-item label="处理人/部门：">
+              <a-input placeholder="请输入处理人/部门" v-model="queryParam.HandleMan"></a-input>
+            </a-form-item>
           </a-col>
+          <a-col :md="6" :sm="6">
+            <a-form-item label="站址名称：">
+              <a-input placeholder="请输入站址名称" v-model="queryParam.SiteName"></a-input>
+            </a-form-item>
+          </a-col>
+          <!-- <a-col :md="10" :sm="10"> -->
+          <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+            <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+            <a-button type="primary" @click="searchReset" style="margin-left: 8px" icon="reload">重置</a-button>
+            <a-button type="primary" @click="handleExportXls('铁塔故障工单')" icon="export" style="margin-left: 8px"
+              >导出</a-button
+            >
+          </span>
+          <!-- </a-col> -->
         </a-row>
       </a-form>
     </div>
@@ -24,79 +35,92 @@
       ref="table"
       size="middle"
       bordered
-      rowKey="id"
+      rowKey="Id"
       :columns="columns"
       :dataSource="dataSource"
       :pagination="ipagination"
       :loading="loading"
       @change="handleTableChange"
     >
-      <!-- 字符串超长截取省略号显示-->
-      <span slot="description" slot-scope="text">
-        <j-ellipsis :value="text" :length="30" />
-      </span>
       <span slot="action" slot-scope="text, record">
-        <a @click="edit(record)">编辑</a>
+        <a @click="detail(record)">详情</a>
       </span>
     </a-table>
 
-    <!-- <DatasourceModal ref="datasourceModal" @loadData="loadData" /> -->
+    <DetailModal ref="refModal" @loadData="loadData" />
   </a-card>
 </template>
 
 <script>
 import { xlMixin } from '@/mixins/xlMixin'
+import DetailModal from './DetailModal'
 
 export default {
-  name: 'DatasourceConfig',
   mixins: [xlMixin],
-  components: {},
+  components: { DetailModal },
   props: {},
   data() {
     return {
       columns: [
         {
-          title: '标题',
+          title: '工单状态',
           align: 'center',
-          dataIndex: 'datasourceTitle'
-          // scopedSlots: { customRender: 'description' }
+          dataIndex: 'WoStatus'
         },
         {
-          title: '类型',
+          title: '处理人/部门',
           align: 'center',
-          dataIndex: 'datasourceType'
-          // scopedSlots: { customRender: 'description' }
+          dataIndex: 'HandleMan'
         },
         {
-          title: '创建人',
+          title: '处理人电话',
           align: 'center',
-          dataIndex: 'createBy'
+          dataIndex: 'Tel'
         },
         {
-          title: '创建时间',
+          title: '派单时间',
           align: 'center',
-          dataIndex: 'createTime',
-          customRender(val) {
-            return val || '-'
-          }
-          // scopedSlots: { customRender: 'orderLevel' },
-          // sorter: (a, b) => a.orderLevel - b.orderLevel
+          dataIndex: 'SendWoTime'
         },
         {
-          title: '修改人',
+          title: '时限（分钟）',
           align: 'center',
-          dataIndex: 'updateBy',
-          customRender(val) {
-            return val || '-'
-          }
+          dataIndex: 'TimeLimit'
         },
         {
-          title: '修改时间',
+          title: '故障设备类型',
           align: 'center',
-          dataIndex: 'updateTime',
-          customRender(val) {
-            return val || '-'
-          }
+          dataIndex: 'FalutType'
+        },
+        {
+          title: '告警状态',
+          align: 'center',
+          dataIndex: 'AlarmStatus'
+        },
+        {
+          title: '告警描述',
+          align: 'center',
+          dataIndex: 'AlarmInfo'
+        },
+        {
+          title: '站址运维ID',
+          align: 'center',
+          dataIndex: 'OperationID'
+        },
+        {
+          title: '站址名称',
+          align: 'center',
+          dataIndex: 'SiteName'
+        },
+        {
+          title: '工单历时（分钟）',
+          align: 'center',
+          dataIndex: 'TimeTake'
+        },
+        {
+          title: '告警时间',
+          align: 'center',
+          dataIndex: 'AlarmTime'
         },
         {
           title: '操作',
@@ -107,7 +131,8 @@ export default {
         }
       ],
       url: {
-        list: '/Data_Manage/Data_Wo_Son_Fault/GetData_Wo_Son_FaultList'
+        list: '/Data_Manage/Data_Wo_Son_Fault/GetData_Wo_Son_FaultList',
+        exportXlsUrl: '/Data_Manage​/Data_Wo_Son_Fault​/Data_Wo_Son_FaultExport'
       }
     }
   },
@@ -115,11 +140,8 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    edit(record) {
-      this.$refs.datasourceModal.edit(record)
-    },
-    add() {
-      this.$refs.datasourceModal.showModal()
+    detail(record) {
+      this.$refs.refModal.openModal(record)
     }
   }
 }

@@ -62,7 +62,6 @@
 import { xlMixin } from '@/mixins/xlMixin'
 
 export default {
-  name: 'DatasourceConfig',
   mixins: [xlMixin],
   components: {},
   props: {},
