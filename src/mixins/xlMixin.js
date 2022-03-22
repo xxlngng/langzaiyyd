@@ -166,21 +166,12 @@ export const xlMixin = {
         return
       }
       var that = this
-      this.$http.post(that.url.delete, { id: id }).then(res => {
-        if (res.success) {
-          that.$message.success(res.message)
+      this.$http.post(that.url.delete, [id]).then(res => {
+        if (res.Success) {
+          that.$message.success(res.Msg)
           that.loadData()
         } else {
-          if (res.code === '0') {
-            that.$message.success(res.msg)
-            that.loadData()
-          } else {
-            if (res.msg != undefined || res.msg != null) {
-              that.$message.warning(res.msg)
-            } else {
-              that.$message.warning(res.message)
-            }
-          }
+          that.$message.warning(res.Msg)
         }
       })
     },

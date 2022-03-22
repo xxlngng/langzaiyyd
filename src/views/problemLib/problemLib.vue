@@ -4,30 +4,35 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="6" :sm="6">
-            <a-form-item label="工单状态：">
-              <a-input placeholder="请输入工单状态" v-model="queryParam.WoStatus"></a-input>
+            <a-form-item label="区县：">
+              <a-input placeholder="请输入区县" v-model="queryParam.County"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="6">
-            <a-form-item label="计划名称：">
-              <a-input placeholder="请输入计划名称：" v-model="queryParam.PlanName"></a-input>
+            <a-form-item label="网格：">
+              <a-input placeholder="请输入网格：" v-model="queryParam.Grid"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="6">
-            <a-form-item label="站址名称：">
-              <a-input placeholder="请输入站址名称" v-model="queryParam.SiteName"></a-input>
+            <a-form-item label="专业类型：">
+              <a-input placeholder="请输入专业类型" v-model="queryParam.MojorType"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="6">
-            <a-form-item label="站址编码：">
-              <a-input placeholder="请输入站址编码" v-model="queryParam.SiteCode"></a-input>
+            <a-form-item label="隐患类型：">
+              <a-input placeholder="请输入隐患类型" v-model="queryParam.FaultType"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :md="6" :sm="6">
+            <a-form-item label="基站名称：">
+              <a-input placeholder="请输入基站名称" v-model="queryParam.SiteName"></a-input>
             </a-form-item>
           </a-col>
           <!-- <a-col :md="10" :sm="10"> -->
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
             <a-button type="primary" @click="searchReset" style="margin-left: 8px" icon="reload">重置</a-button>
-            <a-button type="primary" @click="handleExportXls('铁塔巡检工单')" icon="export" style="margin-left: 8px"
+            <a-button type="primary" @click="handleExportXls('铁塔故障工单')" icon="export" style="margin-left: 8px"
               >导出</a-button
             >
           </span>
@@ -52,60 +57,53 @@
       </span>
     </a-table>
 
-    <DetailModal ref="refModal" @loadData="loadData" />
+    <libModal ref="refModal" @loadData="loadData" />
   </a-card>
 </template>
 
 <script>
 import { xlMixin } from '@/mixins/xlMixin'
-import DetailModal from '../public/DetailModal'
+import libModal from './libModal'
 
 export default {
   mixins: [xlMixin],
-  components: { DetailModal },
+  components: { libModal },
   props: {},
   data() {
     return {
       columns: [
         {
-          title: '工单状态',
+          title: '序号',
           align: 'center',
-          dataIndex: 'WoStatus'
+          width: '50px',
+          customRender(a,b,c) {
+            return c+1
+          }
         },
         {
-          title: '计划名称',
+          title: '区县',
           align: 'center',
-          dataIndex: 'PlanName'
+          dataIndex: 'County'
         },
         {
-          title: '专业',
+          title: '网格',
           align: 'center',
-          dataIndex: 'Major'
+          dataIndex: 'Tel'
         },
         {
-          title: '计划执行时间',
+          title: '专业类型',
           align: 'center',
-          dataIndex: 'ExecuteTime'
+          dataIndex: 'MojorType'
         },
         {
-          title: '站址编码',
+          title: '隐患类型',
           align: 'center',
-          dataIndex: 'SiteCode'
+          dataIndex: 'FaultType'
         },
         {
-          title: '受理专业',
-          align: 'center',
-          dataIndex: 'RecoveryTime'
-        },
-        {
-          title: '站址名称',
+          title: '基站名称',
           align: 'center',
           dataIndex: 'SiteName'
-        },
-        {
-          title: '状态',
-          align: 'center',
-          dataIndex: 'Status'
         },
         {
           title: '操作',
@@ -116,8 +114,8 @@ export default {
         }
       ],
       url: {
-        list: '/Data_Manage/Data_Wo_Son_Check/GetData_Wo_Son_CheckList',
-        exportXlsUrl: '/Data_Manage/Data_Wo_Son_Check/Data_Wo_Son_CheckExport'
+        list: '/Data_Manage/Data_ProPools/GetData_ProPoolsList',
+        exportXlsUrl: '/Data_Manage/Data_ProPools/Data_ProPoolsExport'
       }
     }
   },
@@ -126,16 +124,7 @@ export default {
   mounted() {},
   methods: {
     detail(record) {
-      const info = [
-        { name: '工单状态', value: 'WoStatus' },
-        { name: '计划名称', value: 'PlanName' },
-        { name: '专业', value: 'Major' },
-        { name: '计划执行时间', value: 'ExecuteTime' },
-        { name: '站址编码', value: 'SiteCode' },
-        { name: '站址名称', value: 'SiteName' },
-        { name: '状态', value: 'Status' }
-      ]
-      this.$refs.refModal.openModal(record,info,'/Data_Manage/Data_Wo_Son_Check/GetData_Wo_Son_Check')
+      this.$refs.refModal.openModal(record)
     }
   }
 }

@@ -22,7 +22,7 @@
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
             <a-button type="primary" @click="searchReset" style="margin-left: 8px" icon="reload">重置</a-button>
-            <a-button type="primary" @click="handleExportXls('铁塔故障工单')" icon="export" style="margin-left: 8px"
+            <a-button type="primary" @click="handleExportXls('移动网优工单')" icon="export" style="margin-left: 8px"
               >导出</a-button
             >
           </span>

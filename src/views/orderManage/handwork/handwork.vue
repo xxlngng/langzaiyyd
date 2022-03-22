@@ -28,7 +28,7 @@
             <a-button
               type="primary"
               @click="handleExportXls2('http://ecds.rjtx.net/Upload/downFileModel/site_config_input_model.xlsx')"
-              icon="export"
+              icon="download"
               style="margin-left: 8px"
               >下载模板</a-button
             >
