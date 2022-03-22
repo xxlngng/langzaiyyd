@@ -95,7 +95,7 @@ export default {
       this.selectedRowKeys = []
       this.loading = true
       this.$http
-        .post('/Base_Manage/Base_Role/GetDataList', {
+        .post('/Base_Manage/Base_Role/GetBase_RoleList', {
           PageIndex: this.pagination.current,
           PageRows: this.pagination.pageSize,
           SortField: this.sorter.field || 'Id',
@@ -135,7 +135,7 @@ export default {
       })
     },
     submitDelete(ids, resolve, reject) {
-      this.$http.post('/Base_Manage/Base_Role/DeleteData', ids).then(resJson => {
+      this.$http.post('/Base_Manage/Base_Role/DeleteBase_Role', ids).then(resJson => {
         resolve()
 
         if (resJson.Success) {

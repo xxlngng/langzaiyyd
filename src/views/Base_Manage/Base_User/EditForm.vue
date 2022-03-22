@@ -95,7 +95,7 @@ export default {
       this.init()
 
       if (id) {
-        this.$http.post('/Base_Manage/Base_User/GetBase_Role', { id: id }).then(resJson => {
+        this.$http.post('/Base_Manage/Base_User/GetBase_User', { id: id }).then(resJson => {
           this.entity = resJson.Data
           if (this.entity['Birthday']) {
             this.entity['Birthday'] = moment(this.entity['Birthday'])

@@ -144,7 +144,7 @@ export default {
       })
     },
     submitDelete(ids, resolve, reject) {
-      this.$http.post('/Base_Manage/Base_User/DeleteData', ids).then(resJson => {
+      this.$http.post('/Base_Manage/Base_User/DeleteBase_User', ids).then(resJson => {
         resolve()
 
         if (resJson.Success) {

@@ -67,7 +67,7 @@ export default {
       this.init()
 
       if (id) {
-        this.$http.post('/Base_Manage/Base_Department/GetTheData', { id: id }).then(resJson => {
+        this.$http.post('/Base_Manage/Base_Department/GetBase_Department', { id: id }).then(resJson => {
           this.entity = resJson.Data
         })
       }
@@ -78,7 +78,7 @@ export default {
           return
         }
         this.confirmLoading = true
-        this.$http.post('/Base_Manage/Base_Department/SaveData', this.entity).then(resJson => {
+        this.$http.post('/Base_Manage/Base_Department/SaveBase_Department', this.entity).then(resJson => {
           this.confirmLoading = false
 
           if (resJson.Success) {

@@ -80,7 +80,7 @@ export default {
       this.init()
 
       if (id) {
-        this.$http.post('/Base_Manage/Base_Role/GetTheData', { id: id }).then(resJson => {
+        this.$http.post('/Base_Manage/Base_Role/GetBase_Role', { id: id }).then(resJson => {
           this.entity = resJson.Data
 
           this.checkedKeys = { checked: this.entity['Actions'] }
@@ -115,7 +115,7 @@ export default {
         }
         this.confirmLoading = true
         this.entity['Actions'] = this.checkedKeys.checked
-        this.$http.post('/Base_Manage/Base_Role/SaveData', this.entity).then(resJson => {
+        this.$http.post('/Base_Manage/Base_Role/SaveBase_Role', this.entity).then(resJson => {
           this.confirmLoading = false
 
           if (resJson.Success) {
