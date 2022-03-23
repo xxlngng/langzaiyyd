@@ -10,7 +10,7 @@
             {{ data.FaultRemark }}
           </a-descriptions-item>
           <a-descriptions-item label="现场照片">
-            <img alt="图片" style="width: 100px" :src="data.ImpUrl" @click="previewImage = data.ImpUrl" />
+            <img alt="图片" style="width: 100px" :src="data.ImpUrl" @click="handlePreview(data.ImpUrl)" />
           </a-descriptions-item>
         </a-descriptions>
       </a-card>
@@ -58,8 +58,9 @@ export default {
     cancel() {
       this.visible = false
     },
-    handlePreview(file) {
-      this.previewVisible = 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+    handlePreview(url) {
+      this.previewVisible = true
+      this.previewImage = url
     }
   }
 }

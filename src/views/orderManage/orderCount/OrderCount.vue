@@ -5,7 +5,7 @@
         <a-row :gutter="24">
           <a-col :md="6" :sm="6">
             <a-form-item label="区县：">
-              <a-input placeholder="请输入区县" v-model="queryParam.City"></a-input>
+              <a-input placeholder="请输入区县" v-model="queryParam.County"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="6">

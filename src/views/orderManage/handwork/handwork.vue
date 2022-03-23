@@ -148,7 +148,7 @@ export default {
         { name: '班组', value: 'TeamName' },
         { name: '人员', value: 'HandleMan' }
       ]
-      this.$refs.refModal.openModal(record, info, '​/Data_Manage/Data_Wo_Son_Temp/GetData_Wo_Son_Temp')
+      this.$refs.refModal.openModal(record, info, '/Data_Manage/Data_Wo_Son_Temp/GetData_Wo_Son_Temp')
     },
     httpRequest(option) {
       let formData = new FormData()
