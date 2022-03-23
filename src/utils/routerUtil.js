@@ -27,14 +27,6 @@ const devRouter = [
         path: '/Base_Manage/Base_DbLink/List',
         title: '数据库连接'
       },
-	  {
-        path: '/orderManage/towerProblem/TowerProblem',
-        title: '工单'
-      },
-	  {
-        path: '/orderManage/orderCount/OrderCount',
-        title: '工单统计'
-      },
       {
         path: '/Base_Manage/BuildCode/List',
         title: '代码生成'
