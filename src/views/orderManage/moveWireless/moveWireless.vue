@@ -3,17 +3,17 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="工单状态：">
               <a-input placeholder="请输入工单状态" v-model="queryParam.WoStatus"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="小区名：">
               <a-input placeholder="请输入小区名：" v-model="queryParam.AreaName"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="基站名：">
               <a-input placeholder="请输入基站名" v-model="queryParam.SiteName"></a-input>
             </a-form-item>
@@ -25,6 +25,23 @@
             <a-button type="primary" @click="handleExportXls('移动无线工单')" icon="export" style="margin-left: 8px"
               >导出</a-button
             >
+            <a-button
+              type="primary"
+              @click="handleExportXls2('http://ecds.rjtx.net/Upload/downFileModel/wuxian_input_model.xlsx')"
+              icon="download"
+              style="margin-left: 8px"
+              >下载模板</a-button
+            >
+            <a-upload
+              style="margin-left: 8px"
+              name="file"
+              :multiple="true"
+              :headers="tokenHeader"
+              :customRequest="httpRequest"
+              :showUploadList='false'
+            >
+              <a-button> <a-icon type="upload" />上传</a-button>
+            </a-upload>
           </span>
           <!-- </a-col> -->
         </a-row>
@@ -75,7 +92,7 @@ export default {
         {
           title: '小区名',
           align: 'center',
-          dataIndex: 'Tel'
+          dataIndex: 'AreaName'
         },
         {
           title: '基站名',
@@ -88,19 +105,14 @@ export default {
           dataIndex: 'HandleTime'
         },
         {
-          title: '主设备',
-          align: 'center',
-          dataIndex: 'HandleTime'
-        },
-        {
           title: '受理专业',
           align: 'center',
-          dataIndex: 'RecoveryTime'
+          dataIndex: 'HandleMajor'
         },
         {
           title: '恢复时间',
           align: 'center',
-          dataIndex: 'AlarmInfo'
+          dataIndex: 'RecoveryTime'
         },
         {
           title: '最新回复内容',
@@ -142,13 +154,16 @@ export default {
         { name: '小区名', value: 'AreaName' },
         { name: '基站名', value: 'SiteName' },
         { name: '派单时间', value: 'HandleTime' },
-        { name: '受理专业', value: 'RecoveryTime' },
-        { name: '恢复时间', value: 'AlarmInfo' },
+        { name: '受理专业', value: 'HandleMajor' },
+        { name: '恢复时间', value: 'RecoveryTime' },
         { name: '最新回复内容', value: 'LatestMsg' },
         { name: '优化片区', value: 'OptimizeArea' },
         { name: '网格组长', value: 'GridLeader' },
       ]
       this.$refs.refModal.openModal(record,info,'/Data_Manage/Data_Wo_Son_WuXian/GetData_Wo_Son_WuXian')
+    },
+    httpRequest(option) {
+      this.handleImport1(option, '/Data_Manage/Data_Wo_Son_WuXian/Data_Wo_Son_WuXianInput')
     }
   }
 }

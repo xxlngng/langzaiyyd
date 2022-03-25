@@ -3,17 +3,17 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="工单状态：">
               <a-input placeholder="请输入工单状态" v-model="queryParam.WoStatus"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="小区名：">
               <a-input placeholder="请输入小区名：" v-model="queryParam.AreaName"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="基站名：">
               <a-input placeholder="请输入基站名" v-model="queryParam.SiteName"></a-input>
             </a-form-item>
@@ -25,6 +25,23 @@
             <a-button type="primary" @click="handleExportXls('移动网优工单')" icon="export" style="margin-left: 8px"
               >导出</a-button
             >
+            <a-button
+              type="primary"
+              @click="handleExportXls2('http://ecds.rjtx.net/Upload/downFileModel/wangyou_input_model.xlsx')"
+              icon="download"
+              style="margin-left: 8px"
+              >下载模板</a-button
+            >
+            <a-upload
+              style="margin-left: 8px"
+              name="file"
+              :multiple="true"
+              :headers="tokenHeader"
+              :customRequest="httpRequest"
+              :showUploadList='false'
+            >
+              <a-button> <a-icon type="upload" />上传</a-button>
+            </a-upload>
           </span>
           <!-- </a-col> -->
         </a-row>
@@ -126,6 +143,9 @@ export default {
         { name: '恢复时间', value: 'AlarmEndTime' },
       ]
       this.$refs.refModal.openModal(record,info,'/Data_Manage/Data_Wo_Son_WangYou/GetData_Wo_Son_WangYou')
+    },
+    httpRequest(option) {
+      this.handleImport1(option, '/Data_Manage/Data_Wo_Son_WangYou/Data_Wo_Son_WangYouInput')
     }
   }
 }

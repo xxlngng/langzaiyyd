@@ -30,6 +30,23 @@
             <a-button type="primary" @click="handleExportXls('铁塔巡检工单')" icon="export" style="margin-left: 8px"
               >导出</a-button
             >
+            <a-button
+              type="primary"
+              @click="handleExportXls2('http://ecds.rjtx.net/Upload/downFileModel/check_input_model.xlsx')"
+              icon="download"
+              style="margin-left: 8px"
+              >下载模板</a-button
+            >
+            <a-upload
+              style="margin-left: 8px"
+              name="file"
+              :multiple="true"
+              :headers="tokenHeader"
+              :customRequest="httpRequest"
+              :showUploadList='false'
+            >
+              <a-button> <a-icon type="upload" />上传</a-button>
+            </a-upload>
           </span>
           <!-- </a-col> -->
         </a-row>
@@ -95,7 +112,7 @@ export default {
         {
           title: '受理专业',
           align: 'center',
-          dataIndex: 'RecoveryTime'
+          dataIndex: 'HandleMajor'
         },
         {
           title: '站址名称',
@@ -136,6 +153,9 @@ export default {
         { name: '状态', value: 'Status' }
       ]
       this.$refs.refModal.openModal(record,info,'/Data_Manage/Data_Wo_Son_Check/GetData_Wo_Son_Check')
+    },
+    httpRequest(option) {
+      this.handleImport1(option, '/Data_Manage/Data_Wo_Son_Check/Data_Wo_Son_CheckInput')
     }
   }
 }

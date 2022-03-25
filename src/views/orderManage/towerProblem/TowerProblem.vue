@@ -3,17 +3,17 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="工单状态：">
               <a-input placeholder="请输入工单状态" v-model="queryParam.WoStatus"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="处理人/部门：">
               <a-input placeholder="请输入处理人/部门" v-model="queryParam.HandleMan"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="站址名称：">
               <a-input placeholder="请输入站址名称" v-model="queryParam.SiteName"></a-input>
             </a-form-item>
@@ -25,6 +25,23 @@
             <a-button type="primary" @click="handleExportXls('铁塔故障工单')" icon="export" style="margin-left: 8px"
               >导出</a-button
             >
+            <a-button
+              type="primary"
+              @click="handleExportXls2('http://ecds.rjtx.net/Upload/downFileModel/fault_input_model.xlsx')"
+              icon="download"
+              style="margin-left: 8px"
+              >下载模板</a-button
+            >
+            <a-upload
+              style="margin-left: 8px"
+              name="file"
+              :multiple="true"
+              :headers="tokenHeader"
+              :customRequest="httpRequest"
+              :showUploadList='false'
+            >
+              <a-button> <a-icon type="upload" />上传</a-button>
+            </a-upload>
           </span>
           <!-- </a-col> -->
         </a-row>
@@ -132,7 +149,7 @@ export default {
       ],
       url: {
         list: '/Data_Manage/Data_Wo_Son_Fault/GetData_Wo_Son_FaultList',
-        exportXlsUrl: '/Data_Manage​/Data_Wo_Son_Fault​/Data_Wo_Son_FaultExport'
+        exportXlsUrl: '/Data_Manage/Data_Wo_Son_Fault/Data_Wo_Son_FaultExport'
       }
     }
   },
@@ -151,11 +168,15 @@ export default {
         { name: '告警状态', value: 'AlarmStatus' },
         { name: '告警描述', value: 'AlarmInfo' },
         { name: '站址运维ID', value: 'OperationID' },
-        { name: '站址名称', value: 'OperationID' },
+        { name: '站址名称', value: 'SiteName' },
+        { name: '站址编码', value: 'SiteCode' },
         { name: '工单历时(分钟)', value: 'TimeTake' },
         { name: '告警时间', value: 'AlarmTime' }
       ]
       this.$refs.refModal.openModal(record,info,'/Data_Manage/Data_Wo_Son_Fault/GetData_Wo_Son_Fault')
+    },
+    httpRequest(option) {
+      this.handleImport1(option, '/Data_Manage/Data_Wo_Son_Fault/Data_Wo_Son_FaultInput')
     }
   }
 }

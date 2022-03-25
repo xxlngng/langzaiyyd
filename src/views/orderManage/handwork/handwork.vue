@@ -3,17 +3,17 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="工单状态：">
               <a-input placeholder="请输入工单状态" v-model="queryParam.WoStatus"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="网格：">
               <a-input placeholder="请输入网格：" v-model="queryParam.Grid"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="6">
+          <a-col :md="8" :sm="8">
             <a-form-item label="站址名称：">
               <a-input placeholder="请输入站址名称" v-model="queryParam.SiteName"></a-input>
             </a-form-item>
@@ -151,25 +151,7 @@ export default {
       this.$refs.refModal.openModal(record, info, '/Data_Manage/Data_Wo_Son_Temp/GetData_Wo_Son_Temp')
     },
     httpRequest(option) {
-      let formData = new FormData()
-      // 向 formData 对象中添加文件
-      formData.append('formFile', option.file)
-      this.loading = true
-      this.$http
-        .post('/Data_Manage/Data_Wo_Son_Temp/Data_Wo_Son_TempInput', formData)
-        .then(res => {
-          if (res.Success) {
-            this.$meaage.success(res.Msg)
-            this.loadData()
-          } else {
-            this.$meaage.warning(res.Msg)
-          }
-
-          this.loading = false
-        })
-        .catch(() => {
-          this.loading = false
-        })
+      this.handleImport1(option, '/Data_Manage/Data_Wo_Son_Temp/Data_Wo_Son_TempInput')
     }
   }
 }

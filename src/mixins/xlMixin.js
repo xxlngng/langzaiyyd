@@ -1,5 +1,5 @@
 import TokenCache from '@/utils/cache/TokenCache'
-import vue from 'vue'
+// import { saveAs } from 'file-saver'
 
 /**
  * 过滤对象中为空的属性
@@ -223,16 +223,26 @@ export const xlMixin = {
       if (flag !== undefined) {
         param['flag'] = flag
       }
-      console.log('导出参数', param)
-      this.$http.post(this.url.exportXlsUrl, param).then(data => {
+      this.$http({ url: this.url.exportXlsUrl, data: param, method: 'POST', responseType: 'blob' }).then(data => {
         if (!data) {
           this.$message.warning('文件下载失败')
           return
         }
         if (typeof window.navigator.msSaveBlob !== 'undefined') {
-          window.navigator.msSaveBlob(new Blob([data]), fileName + '.xlsx')
+          window.navigator.msSaveBlob(
+            new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+            fileName + '.xlsx'
+          )
         } else {
-          let url = window.URL.createObjectURL(new Blob([data]))
+          // let blob = new Blob([data], {
+          //   type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          // })
+          // saveAs(blob, fileName + '.xlsx')
+          // return
+          let url = window.URL.createObjectURL(
+            new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+          )
+          console.log('url', url)
           let link = document.createElement('a')
           link.style.display = 'none'
           link.href = url
@@ -266,6 +276,28 @@ export const xlMixin = {
       } else if (info.file.status === 'error') {
         this.$message.error(`文件上传失败: ${info.file.msg} `)
       }
+    },
+    // 自定义导入
+    handleImport1(option, url) {
+      let formData = new FormData()
+      // 向 formData 对象中添加文件
+      formData.append('formFile', option.file)
+      this.loading = true
+      this.$http
+        .post(url, formData)
+        .then(res => {
+          if (res.Success) {
+            this.$message.success(res.Msg)
+            this.loadData()
+          } else {
+            this.$message.warning(res.Msg)
+          }
+
+          this.loading = false
+        })
+        .catch(() => {
+          this.loading = false
+        })
     }
   }
 }

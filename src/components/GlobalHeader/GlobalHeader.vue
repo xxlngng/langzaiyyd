@@ -3,11 +3,12 @@
     <div v-if="visible" class="header-animat">
       <a-layout-header
         v-if="visible"
-        :class="[fixedHeader && 'ant-header-fixedHeader', sidebarOpened ? 'ant-header-side-opened' : 'ant-header-side-closed', ]"
+        :class="[ 'ant-header-fixedHeader', sidebarOpened ? 'ant-header-side-opened' : 'ant-header-side-closed', ]"
         :style="{ padding: '0' }">
-        <div v-if="mode === 'sidemenu'" class="header">
+        <div v-if="mode === 'sidemenu'" class="header" style="background-color: #428aff;color: white;">
           <a-icon v-if="device==='mobile'" class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'" @click="toggle"/>
           <a-icon v-else class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggle"/>
+          <div class="glo-title" >综维优一体化平台</div>
           <user-menu></user-menu>
         </div>
         <div v-else :class="['top-nav-header-index', theme]">
@@ -121,5 +122,15 @@ export default {
 }
 .showHeader-enter, .showHeader-leave-to {
   opacity: 0;
+}
+
+.glo-title {
+  display: inline-block;
+    text-align: center;
+    position: absolute;
+    right: 50%;
+    /* transform: translateX(50%); */
+    font-size: 22px;
+    font-weight: 600;
 }
 </style>
