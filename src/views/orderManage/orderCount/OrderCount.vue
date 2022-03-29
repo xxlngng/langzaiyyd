@@ -36,7 +36,7 @@
 
     <a-table
       ref="table"
-      size="middle"
+      size="small"
       bordered
       rowKey="Id"
       :columns="columns"

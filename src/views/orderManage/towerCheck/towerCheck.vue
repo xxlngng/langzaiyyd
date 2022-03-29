@@ -55,7 +55,7 @@
 
     <a-table
       ref="table"
-      size="middle"
+      size="small"
       bordered
       rowKey="Id"
       :columns="columns"
@@ -76,6 +76,7 @@
 <script>
 import { xlMixin } from '@/mixins/xlMixin'
 import DetailModal from '../public/DetailModal'
+import moment from 'moment'
 
 export default {
   mixins: [xlMixin],
@@ -102,7 +103,10 @@ export default {
         {
           title: '计划执行时间',
           align: 'center',
-          dataIndex: 'ExecuteTime'
+          dataIndex: 'ExecuteTime',
+          customRender(t) {
+            return t&&moment(t).format('YYYY-MM-DD HH:mm:ss')
+          }
         },
         {
           title: '站址编码',

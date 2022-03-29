@@ -50,7 +50,7 @@
 
     <a-table
       ref="table"
-      size="middle"
+      size="small"
       bordered
       rowKey="Id"
       :columns="columns"
@@ -123,7 +123,6 @@ export default {
           title: '操作',
           dataIndex: 'action',
           align: 'center',
-          width: 180,
           scopedSlots: { customRender: 'action' }
         }
       ],

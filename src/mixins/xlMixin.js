@@ -1,6 +1,5 @@
 import TokenCache from '@/utils/cache/TokenCache'
 // import { saveAs } from 'file-saver'
-
 /**
  * 过滤对象中为空的属性
  * @param obj

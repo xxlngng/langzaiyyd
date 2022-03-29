@@ -20,7 +20,7 @@
 
     <a-table
       ref="table"
-      size="middle"
+      size="small"
       bordered
       rowKey="Id"
       :columns="columns"
@@ -43,6 +43,7 @@
 <script>
 import { xlMixin } from '@/mixins/xlMixin'
 import ruleModal from './ruleModal'
+import moment from 'moment'
 
 export default {
   mixins: [xlMixin],
@@ -72,7 +73,10 @@ export default {
         {
           title: '创建时间',
           align: 'center',
-          dataIndex: 'CreateTime'
+          dataIndex: 'CreateTime',
+          customRender(t) {
+            return t&&moment(t).format('YYYY-MM-DD HH:mm:ss')
+          }
         },
         {
           title: '操作',

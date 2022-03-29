@@ -50,7 +50,7 @@
 
     <a-table
       ref="table"
-      size="middle"
+      size="small"
       bordered
       rowKey="Id"
       :columns="columns"
@@ -71,6 +71,7 @@
 <script>
 import { xlMixin } from '@/mixins/xlMixin'
 import DetailModal from '../public/DetailModal'
+import moment from 'moment'
 
 export default {
   mixins: [xlMixin],
@@ -102,7 +103,10 @@ export default {
         {
           title: '派单时间',
           align: 'center',
-          dataIndex: 'HandleTime'
+          dataIndex: 'SendTime',
+          customRender(t) {
+            return t&&moment(t).format('YYYY-MM-DD HH:mm:ss')
+          }
         },
         {
           title: '受理专业',
@@ -112,7 +116,10 @@ export default {
         {
           title: '恢复时间',
           align: 'center',
-          dataIndex: 'RecoveryTime'
+          dataIndex: 'RecoveryTime',
+          customRender(t) {
+            return t&&moment(t).format('YYYY-MM-DD HH:mm:ss')
+          }
         },
         {
           title: '最新回复内容',
@@ -153,7 +160,7 @@ export default {
         { name: '告警名称', value: 'AlarmName' },
         { name: '小区名', value: 'AreaName' },
         { name: '基站名', value: 'SiteName' },
-        { name: '派单时间', value: 'HandleTime' },
+        { name: '派单时间', value: 'SendTime' },
         { name: '受理专业', value: 'HandleMajor' },
         { name: '恢复时间', value: 'RecoveryTime' },
         { name: '最新回复内容', value: 'LatestMsg' },

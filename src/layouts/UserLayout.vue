@@ -9,8 +9,8 @@
           </a>
         </div>
         <div class="desc">
-          致力于提高开发效率
-          <br />解放生产力
+          <!-- 致力于提高开发效率
+          <br />解放生产力 -->
         </div>
       </div>
 
@@ -75,7 +75,9 @@ export default {
     background-size: 100%;
     padding: 110px 0 144px;
     position: relative;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     a {
       text-decoration: none;
     }

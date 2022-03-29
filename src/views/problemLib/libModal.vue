@@ -10,7 +10,7 @@
             {{ data.FaultRemark }}
           </a-descriptions-item>
           <a-descriptions-item label="现场照片">
-            <img alt="图片" style="width: 100px" :src="data.ImpUrl" @click="handlePreview(data.ImpUrl)" />
+            <img alt="图片" style="width: 100px" v-for="(item, index) in data.ImgArr" :key="index" :src="item" @click="handlePreview(item)" />
           </a-descriptions-item>
         </a-descriptions>
       </a-card>
@@ -46,6 +46,9 @@ export default {
         .then(res => {
           if (res.Success) {
             this.data = res.Data
+            if (this.data.ImgURL) {
+              this.data.ImgArr = this.data.ImgURL.split(',')
+            }
           } else {
             this.$message.warning(res.Msg)
           }

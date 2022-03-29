@@ -2,12 +2,10 @@
   <div class="main">
     <a-spin :spinning="loading">
       <a-form id="formLogin" class="user-layout-login" ref="formLogin" :form="form" @submit="handleSubmit">
-        <a-tabs
-          :activeKey="customActiveKey"
+        <div
           :tabBarStyle="{ textAlign: 'center', borderBottom: 'unset' }"
-          @change="handleTabClick"
         >
-          <a-tab-pane key="tab1" tab="账号密码登录">
+          <!-- <a-tab-pane key="tab1" tab=""> -->
             <a-form-item>
               <a-input
                 size="large"
@@ -33,53 +31,8 @@
             <a-form-item>
               <a-checkbox v-decorator="['savePwd', { valuePropName: 'checked' }]">记住密码</a-checkbox>
             </a-form-item>
-          </a-tab-pane>
-          <!-- <a-tab-pane key="tab2" tab="手机号登录">
-          <a-form-item>
-            <a-input
-              size="large"
-              type="text"
-              placeholder="手机号"
-              v-decorator="[
-                'mobile',
-                {
-                  rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号' }],
-                  validateTrigger: 'change'
-                }
-              ]"
-            >
-              <a-icon slot="prefix" type="mobile" :style="{ color: 'rgba(0,0,0,.25)' }" />
-            </a-input>
-          </a-form-item>
-
-          <a-row :gutter="16">
-            <a-col class="gutter-row" :span="16">
-              <a-form-item>
-                <a-input
-                  size="large"
-                  type="text"
-                  placeholder="验证码"
-                  v-decorator="[
-                    'captcha',
-                    { rules: [{ required: true, message: '请输入验证码' }], validateTrigger: 'blur' }
-                  ]"
-                >
-                  <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }" />
-                </a-input>
-              </a-form-item>
-            </a-col>
-            <a-col class="gutter-row" :span="8">
-              <a-button
-                class="getCaptcha"
-                tabindex="-1"
-                :disabled="state.smsSendBtn"
-                @click.stop.prevent="getCaptcha"
-                v-text="(!state.smsSendBtn && '获取验证码') || state.time + ' s'"
-              ></a-button>
-            </a-col>
-          </a-row>
-        </a-tab-pane> -->
-        </a-tabs>
+          <!-- </a-tab-pane> -->
+        </div>
 
         <a-form-item style="margin-top:24px">
           <a-button size="large" type="primary" htmlType="submit" class="login-button">确定</a-button>

@@ -43,7 +43,7 @@
 
     <a-table
       ref="table"
-      size="middle"
+      size="small"
       bordered
       rowKey="Id"
       :columns="columns"
@@ -88,7 +88,7 @@ export default {
         {
           title: '网格',
           align: 'center',
-          dataIndex: 'Tel'
+          dataIndex: 'Grid'
         },
         {
           title: '专业类型',

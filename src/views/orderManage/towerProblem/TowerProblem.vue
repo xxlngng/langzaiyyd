@@ -50,7 +50,7 @@
 
     <a-table
       ref="table"
-      size="middle"
+      size="small"
       bordered
       rowKey="Id"
       :columns="columns"
@@ -71,6 +71,7 @@
 <script>
 import { xlMixin } from '@/mixins/xlMixin'
 import DetailModal from '../public/DetailModal'
+import moment from 'moment'
 
 export default {
   mixins: [xlMixin],
@@ -97,7 +98,10 @@ export default {
         {
           title: '派单时间',
           align: 'center',
-          dataIndex: 'SendWoTime'
+          dataIndex: 'SendWoTime',
+          customRender(t) {
+            return t&&moment(t).format('YYYY-MM-DD HH:mm:ss')
+          }
         },
         {
           title: '时限（分钟）',
@@ -137,13 +141,15 @@ export default {
         {
           title: '告警时间',
           align: 'center',
-          dataIndex: 'AlarmTime'
+          dataIndex: 'AlarmTime',
+          customRender(t) {
+            return t&&moment(t).format('YYYY-MM-DD HH:mm:ss')
+          }
         },
         {
           title: '操作',
           dataIndex: 'action',
           align: 'center',
-          width: 180,
           scopedSlots: { customRender: 'action' }
         }
       ],
