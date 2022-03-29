@@ -4,6 +4,18 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="6" :sm="6">
+            <a-form-item label="工单类型：">
+              <a-select style="width: 100%" default-value="移动工单" v-model="queryParam.WoType">
+                <a-select-option value="移动工单">
+                  移动工单
+                </a-select-option>
+                <a-select-option value="铁塔工单">
+                  铁塔工单
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :md="6" :sm="6">
             <a-form-item label="区县：">
               <a-input placeholder="请输入区县" v-model="queryParam.County"></a-input>
             </a-form-item>
@@ -27,7 +39,9 @@
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
               <a-button type="primary" @click="searchReset" style="margin-left: 8px" icon="reload">重置</a-button>
-              <a-button type="primary" @click="handleExportXls('工单统计')" icon="export" style="margin-left: 8px">导出</a-button>
+              <a-button type="primary" @click="handleExportXls('工单统计')" icon="export" style="margin-left: 8px"
+                >导出</a-button
+              >
             </span>
           </a-col>
         </a-row>
@@ -86,18 +100,18 @@ export default {
         {
           title: '网格',
           align: 'center',
-          dataIndex: 'Grid',
+          dataIndex: 'Grid'
         },
-        {
-          title: '班组人员',
-          align: 'center',
-          dataIndex: 'TeamName'
-        },
-        {
-          title: '故障原因',
-          align: 'center',
-          dataIndex: 'FaultCause'
-        },
+        // {
+        //   title: '班组人员',
+        //   align: 'center',
+        //   dataIndex: 'TeamName'
+        // },
+        // {
+        //   title: '故障原因',
+        //   align: 'center',
+        //   dataIndex: 'FaultCause'
+        // },
         {
           title: '权重值',
           align: 'center',
@@ -108,6 +122,11 @@ export default {
           align: 'center',
           dataIndex: 'FaultNum'
         },
+        {
+          title: '工单类型',
+          align: 'center',
+          dataIndex: 'WoType'
+        }
         // {
         //   title: '操作',
         //   dataIndex: 'action',
@@ -118,12 +137,14 @@ export default {
       ],
       url: {
         list: '/Data_Manage/Data_Wo/GetData_WoList',
-exportXlsUrl: '/Data_Manage/Data_Wo/Data_WoExport'
+        exportXlsUrl: '/Data_Manage/Data_Wo/Data_WoExport'
       }
     }
   },
   watch: {},
-  created() {},
+  created() {
+    this.queryParam.WoType = '移动工单'
+  },
   mounted() {},
   methods: {
     edit(record) {
