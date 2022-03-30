@@ -5,7 +5,7 @@
         <a-row :gutter="24">
           <a-col :md="6" :sm="6">
             <a-form-item label="工单类型：">
-              <a-select style="width: 100%" default-value="移动工单" v-model="queryParam.WoType">
+              <a-select style="width: 100%" v-model="queryParam.WoType">
                 <a-select-option value="移动工单">
                   移动工单
                 </a-select-option>
@@ -68,7 +68,6 @@
       </span>
     </a-table>
 
-    <!-- <DatasourceModal ref="datasourceModal" @loadData="loadData" /> -->
   </a-card>
 </template>
 
@@ -127,23 +126,23 @@ export default {
           align: 'center',
           dataIndex: 'WoType'
         }
-        // {
-        //   title: '操作',
-        //   dataIndex: 'action',
-        //   align: 'center',
-        //   width: 180,
-        //   scopedSlots: { customRender: 'action' }
-        // }
       ],
       url: {
         list: '/Data_Manage/Data_Wo/GetData_WoList',
         exportXlsUrl: '/Data_Manage/Data_Wo/Data_WoExport'
-      }
+      },
+      queryParam: {
+        WoType: '移动工单'
+      },
+      isorter: {
+        SortField: 'FaultNum',
+        SortType: 'desc'
+      },
     }
   },
   watch: {},
   created() {
-    this.queryParam.WoType = '移动工单'
+    // this.queryParam.WoType = '移动工单'
   },
   mounted() {},
   methods: {
