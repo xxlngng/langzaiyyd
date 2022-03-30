@@ -10,7 +10,7 @@
           </a-col>
           <a-col :md="6" :sm="6">
             <a-form-item label="是否超时：">
-              <a-input placeholder="请输入是否超时：" v-model="queryParam.IsTimeOut"></a-input>
+              <a-input placeholder="请输入是否超时" v-model="queryParam.IsTimeOut"></a-input>
             </a-form-item>
           </a-col>
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
@@ -47,6 +47,7 @@
 <script>
 import { xlMixin } from '@/mixins/xlMixin'
 import DetailModal from '../public/DetailModal'
+import moment from 'moment'
 
 export default {
   mixins: [xlMixin],
@@ -78,7 +79,10 @@ export default {
         {
           title: 'T1升级移交时间',
           align: 'center',
-          dataIndex: 'HandleTime'
+          dataIndex: 'HandleTime',
+          customRender(t) {
+            return t&&moment(t).format('YYYY-MM-DD HH:mm:ss')
+          }
         },
         {
           title: '是否延期有效',

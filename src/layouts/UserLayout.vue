@@ -4,7 +4,7 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <img src="@/assets/logo.svg" class="logo" alt="logo" />
+            <!-- <img src="@/assets/logo.svg" class="logo" alt="logo" /> -->
             <span class="title">{{ getTitle() }}</span>
           </a>
         </div>
@@ -61,19 +61,19 @@ export default {
 
   &.mobile {
     .container {
-      .main {
-        max-width: 368px;
-        width: 98%;
-      }
+      // .main {
+      //   max-width: 368px;
+      //   width: 98%;
+      // }
     }
   }
 
   .container {
     width: 100%;
     min-height: 100%;
-    background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;
+    background: #f0f2f5 url(~@/assets/bg-lg.png) no-repeat 50%;
     background-size: 100%;
-    padding: 110px 0 144px;
+    // padding: 110px 0 144px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -108,7 +108,7 @@ export default {
 
         .title {
           font-size: 33px;
-          color: rgba(0, 0, 0, 0.85);
+          color: #fff;
           font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
           font-weight: 600;
           position: relative;
@@ -125,7 +125,7 @@ export default {
 
     .main {
       min-width: 260px;
-      width: 368px;
+      // width: 368px;
       margin: 0 auto;
     }
 

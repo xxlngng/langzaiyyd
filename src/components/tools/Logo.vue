@@ -3,7 +3,7 @@
     <!-- <router-link :to="{ path: '/' }"> -->
       <!-- <LogoSvg alt="logo" /> -->
       <!-- <h3 v-if="showTitle" style="display:inline-block;color:#fff">综维优一体化平台</h3> -->
-      <img style="height:64px;width:160px" src="../../assets/nm.png" alt="logo">
+      <img style="height:48px;width:128px" src="../../assets/nm.png" alt="logo">
     <!-- </router-link> -->
   </div>
 </template>

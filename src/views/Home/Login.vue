@@ -1,41 +1,40 @@
 <template>
   <div class="main">
     <a-spin :spinning="loading">
+      <h2 style="color: #76a4f1;margin-bottom:20px;font-weight:600;">登录</h2>
       <a-form id="formLogin" class="user-layout-login" ref="formLogin" :form="form" @submit="handleSubmit">
-        <div
-          :tabBarStyle="{ textAlign: 'center', borderBottom: 'unset' }"
-        >
-          <!-- <a-tab-pane key="tab1" tab=""> -->
-            <a-form-item>
-              <a-input
-                size="large"
-                type="text"
-                placeholder="请输入用户名"
-                v-decorator="['userName', { rules: [{ required: true, message: '请输入用户名' }] }]"
-              >
-                <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }" />
-              </a-input>
-            </a-form-item>
+        <div :tabBarStyle="{ textAlign: 'center', borderBottom: 'unset' }">
+          <a-form-item>
+            <a-input
+              size="large"
+              type="text"
+              placeholder="请输入用户名"
+              v-decorator="['userName', { rules: [{ required: true, message: '请输入用户名' }] }]"
+            >
+              <a-icon slot="prefix" type="user" :style="{ color: '#2767d4' }" />
+            </a-input>
+          </a-form-item>
 
-            <a-form-item>
-              <a-input
-                size="large"
-                type="password"
-                autocomplete="false"
-                placeholder="请输入密码"
-                v-decorator="['password', { rules: [{ required: true, message: '请输入密码' }] }]"
-              >
-                <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }" />
-              </a-input>
-            </a-form-item>
-            <a-form-item>
-              <a-checkbox v-decorator="['savePwd', { valuePropName: 'checked' }]">记住密码</a-checkbox>
-            </a-form-item>
-          <!-- </a-tab-pane> -->
+          <a-form-item>
+            <a-input
+              size="large"
+              type="password"
+              autocomplete="false"
+              placeholder="请输入密码"
+              v-decorator="['password', { rules: [{ required: true, message: '请输入密码' }] }]"
+            >
+              <a-icon slot="prefix" type="lock" :style="{ color: '#2767d4' }" />
+            </a-input>
+          </a-form-item>
+          <a-form-item>
+            <a-checkbox v-decorator="['savePwd', { valuePropName: 'checked' }]"
+              ><span style="color: #fff">记住密码</span></a-checkbox
+            >
+          </a-form-item>
         </div>
 
         <a-form-item style="margin-top:24px">
-          <a-button size="large" type="primary" htmlType="submit" class="login-button">确定</a-button>
+          <a-button size="large" type="primary" htmlType="submit" class="login-button">登录</a-button>
         </a-form-item>
       </a-form>
     </a-spin>
@@ -99,6 +98,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.main {
+  background: url(/img/lg-f.bf8a2c9f.png) no-repeat;
+  background-size: 100% 100%;
+  height: 380px;
+  width: 440px;
+  padding: 42px 48px;
+}
 .user-layout-login {
   label {
     font-size: 14px;
