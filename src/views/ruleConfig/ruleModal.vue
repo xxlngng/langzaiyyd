@@ -19,6 +19,13 @@
         <a-form-model-item label="涉及网站" prop="fileList">
           <template>
             <a-button type="primary" icon="download">下载模板</a-button>
+            <a-button
+              type="primary"
+              @click="handleExportXls2('http://ecds.rjtx.net/Upload/downFileModel/site_config_input_model.xlsx')"
+              icon="download"
+              style="margin-left: 8px"
+              >下载模板</a-button
+            >
             <a-upload
               style="margin-left: 8px"
               name="file"

@@ -114,6 +114,11 @@ export default {
           dataIndex: 'FalutType'
         },
         {
+          title: '告警名称',
+          align: 'center',
+          dataIndex: 'AlertName'
+        },
+        {
           title: '告警状态',
           align: 'center',
           dataIndex: 'AlarmStatus'
@@ -171,6 +176,7 @@ export default {
         { name: '派单时间', value: 'SendWoTime' },
         { name: '时限（分钟）', value: 'TimeLimit' },
         { name: '故障设备类型', value: 'FalutType' },
+        { name: '告警名称', value: 'AlertName' },
         { name: '告警状态', value: 'AlarmStatus' },
         { name: '告警描述', value: 'AlarmInfo' },
         { name: '站址运维ID', value: 'OperationID' },
