@@ -113,11 +113,11 @@ export default {
           align: 'center',
           dataIndex: 'SiteCode'
         },
-        {
-          title: '受理专业',
-          align: 'center',
-          dataIndex: 'HandleMajor'
-        },
+        // {
+        //   title: '受理专业',
+        //   align: 'center',
+        //   dataIndex: 'HandleMajor'
+        // },
         {
           title: '站址名称',
           align: 'center',
